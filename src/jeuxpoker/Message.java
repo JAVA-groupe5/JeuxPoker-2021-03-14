@@ -5,7 +5,6 @@
  */
 package jeuxpoker;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,11 +18,9 @@ public class Message {
     private Membre membre;
     private Billet billet;
     private Admin admin;
-    
-        
+            
     //constructeur
 
-    
     public Message(String contenuMessage, String reponseAdmin, Membre membre, Billet billet, Admin admin) {
         this.contenuMessage = contenuMessage;
         this.reponseAdmin = reponseAdmin;
@@ -32,8 +29,6 @@ public class Message {
         this.admin=admin;
     }
 
-    
-    
     //getter-setter
 
     /**

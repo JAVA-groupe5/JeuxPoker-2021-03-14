@@ -16,7 +16,7 @@ public class Admin extends Personne {
        //attributs
     private int noAdmin;
     private static int nextNoAdmin=1;
-    private Set<Message> messages=new HashSet(0);;
+    private Set<Message> messages=new HashSet(0);
     
     
     //constructeurs
