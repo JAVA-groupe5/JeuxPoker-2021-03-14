@@ -11,7 +11,7 @@ package jeuxpoker;
  */
 public class Details {
        //attributs
-    private int prixAchat;
+    private double prixAchat;
     private int qutAchat;
     private Commande commandes;
     private Produits produits;
@@ -20,7 +20,7 @@ public class Details {
     
     //constructeurs
 
-    public Details(int prixAchat, int qutAchat) {
+    public Details(double prixAchat, int qutAchat) {
         this.prixAchat = prixAchat;
         this.qutAchat = qutAchat;
     }
@@ -32,14 +32,14 @@ public class Details {
     /**
      * @return the prixAchat
      */
-    public int getPrixAchat() {
+    public double getPrixAchat() {
         return prixAchat;
     }
 
     /**
      * @param prixAchat the prixAchat to set
      */
-    public void setPrixAchat(int prixAchat) {
+    public void setPrixAchat(double prixAchat) {
         this.prixAchat = prixAchat;
     }
 

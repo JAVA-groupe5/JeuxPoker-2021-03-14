@@ -17,7 +17,7 @@ public class Billet {
     
     //attributs
     private static int nextNoBillet=1;
-    private int noBillet=1;
+    private int noBillet;
     private Date dateBillet;
     private Set<Message> messages= new HashSet(0);
     
@@ -32,25 +32,20 @@ public class Billet {
     public Billet( Date dateBillet) {
         
         this.dateBillet = dateBillet;
-        noBillet=nextNoBillet;
-        nextNoBillet++;
+        noBillet=nextNoBillet++;
     }
 
     public Billet(Date dateBillet, Set<Message> messages) {
         
         this.dateBillet = dateBillet;
         this.messages=messages;
-        noBillet=nextNoBillet;
-        nextNoBillet++;
+        noBillet=nextNoBillet++;
     }
      
     
     //getter-setter
 
-    public static int getNextNoBillet() {
-        return nextNoBillet;
-    }
-
+    
     public int getNoBillet() {
         return noBillet;
     }
@@ -63,10 +58,7 @@ public class Billet {
         return messages;
     }
 
-    public static void setNextNoBillet(int nextNoBillet) {
-        Billet.nextNoBillet = nextNoBillet;
-    }
-
+    
     public void setNoBillet(int noBillet) {
         this.noBillet = noBillet;
     }

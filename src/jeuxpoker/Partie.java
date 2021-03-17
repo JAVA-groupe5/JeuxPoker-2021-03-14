@@ -16,7 +16,7 @@ import java.util.Set;
 public class Partie {
        //attributs
     private int noPartie;
-    private static int NextNoPartie=0;
+    private static int NextNoPartie=1;
     private Date datePartie;
     private ModeDeJeu modeDeJeu;
      private Set<Membre>membres= new HashSet(0);
@@ -32,8 +32,7 @@ public class Partie {
     public Partie(Date datePartie, ModeDeJeu modeDeJeu) {
         this.datePartie = datePartie;
         this.modeDeJeu = modeDeJeu;
-         noPartie=NextNoPartie;
-        NextNoPartie++;
+         noPartie=NextNoPartie++;
     }
 
     public int getNoPartie() {

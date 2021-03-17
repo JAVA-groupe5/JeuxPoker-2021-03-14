@@ -5,6 +5,9 @@
  */
 package jeuxpoker;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author thomas
@@ -17,22 +20,10 @@ public class Message {
     private Billet billet;
     private Admin admin;
     
+        
     //constructeur
 
-    public Message() {
-    }
-
-    public Message(String reponseAdmin, Admin admin) {
-        this.reponseAdmin = reponseAdmin;
-        this.admin = admin;
-    }
-
     
-    public Message(String contenuMessage, Membre membre) {
-        this.contenuMessage = contenuMessage;
-        this.membre = membre;
-    }
-
     public Message(String contenuMessage, String reponseAdmin, Membre membre, Billet billet, Admin admin) {
         this.contenuMessage = contenuMessage;
         this.reponseAdmin = reponseAdmin;
@@ -118,8 +109,17 @@ public class Message {
      //méthode
     
     public void afficher(){
-        System.out.println(this.reponseAdmin +"-"+ this.admin);
-        
+        System.out.println(this.reponseAdmin +"-"+ this.getAdmin());
+        }
+    
+    public static void afficherMessage(Set<Message> msg) {
+
+        msg.forEach(item -> {
+           System.out.println("| " + item.getContenuMessage()+"|"+item.getReponseAdmin());
+            System.out.println(item.getMembre().nom+"|"+item.getAdmin().nom);
+            System.out.println(item.getBillet().getNoBillet());
+        });
     }
+    
     
 }

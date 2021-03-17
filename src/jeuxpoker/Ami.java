@@ -6,6 +6,7 @@
 package jeuxpoker;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Ami {
     private Date dateDemande;
     private boolean EtatDemande;
     private Membre membre;
+    
+    
     
     //constructeurs
    

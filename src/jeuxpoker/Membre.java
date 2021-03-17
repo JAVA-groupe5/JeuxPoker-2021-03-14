@@ -12,39 +12,32 @@ import java.util.Set;
  *
  * @author thomas
  */
-public class Membre extends Personne{
-    
+public class Membre extends Personne {
+
     //attributs
     private int noMembre;
-    private static int nextNoMembre=1;
+    private static int nextNoMembre = 1;
     private String avatar;
     private String surnom;
     private String email;
     private int nbCredit;
-    private Set<Message> messages= new HashSet(0);
-    private Set<Partie>parties= new HashSet(0);
-    private Set<Commande>commandes= new HashSet(0);
-    private Set<Membre>demandeur= new HashSet(0);
-    private Set<Membre>receveur= new HashSet(0);
-
+    private static int nbCreditDepart;
+    private Set<Message> messages = new HashSet(0);
+    private Set<Partie> parties = new HashSet(0);
+    private Set<Commande> commandes = new HashSet(0);
+    private Set<Membre> demandeur = new HashSet(0);
+    private Set<Membre> receveur = new HashSet(0);
 
     //constructeurs
-
-    public Membre(String nom, String prenom) {
+    public Membre(String avatar, String surnom, String email, int nbCredit, String nom, String prenom) {
         super(nom, prenom);
-        noMembre=nextNoMembre;
-        nextNoMembre++;
-    }
 
-    public Membre( String avatar, String surnom, String email, int nbCredit, String nom, String prenom) {
-        super(nom, prenom);
-        
         this.avatar = avatar;
         this.surnom = surnom;
         this.email = email;
         this.nbCredit = nbCredit;
-        noMembre=nextNoMembre;
-        nextNoMembre++;
+        noMembre = nextNoMembre++;
+
     }
 
     public int getNoMembre() {
@@ -79,8 +72,6 @@ public class Membre extends Personne{
         return commandes;
     }
 
-      
-
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
@@ -108,15 +99,28 @@ public class Membre extends Personne{
     public void setCommandes(Set<Commande> commandes) {
         this.commandes = commandes;
     }
-    
-    
-public void afficher(){
-        System.out.println(noMembre+"-"+this.avatar 
-        +"-"+this.surnom +"-"+ this.email+"-"+ this.nbCredit );
+
+    public void afficher() {
+        System.out.println(noMembre + "-" + this.avatar
+                + "-" + this.surnom + "-" + this.email + "-" + this.nbCredit);
         super.afficher();
     }
-    
 
-    
-    
+    public static void afficherAmi(Set<Ami> amiss) {
+
+        amiss.forEach(item -> {
+            System.out.println("| " + item.getMembre().getSurnom() + "|" + item.getDateDemande());
+            System.out.println(item.isEtatDemande());
+        });
+    }
+
+    public static void afficherMesAchats(Set<Commande> cde) {
+
+        cde.forEach(item -> {
+            System.out.println("| " + item.getNoCommande() + "|" + item.getDateCommande());
+            item.getProduits().forEach(pdt -> {
+                System.out.println("| " + pdt.getNomProduit() + "|" + pdt.getDescription());
+            });
+        });
+    }
 }
