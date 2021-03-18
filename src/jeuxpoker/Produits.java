@@ -13,33 +13,26 @@ import java.util.Set;
  * @author thomas
  */
 public class Produits {
-       //attributs
+    //attributs
+
     private int noProduit;
-    private static int nextNoProduit=1;
+    private static int nextNoProduit = 1;
     private String nomProduit;
     private int prixProduit;
     private String description;
-    private Set<Commande>commandes= new HashSet(0);
+    private Set<Commande> commandes = new HashSet(0);
 
-    
-    
     //constructeurs
-
     public Produits(String nomProduit, int prixProduit, String description) {
         this.nomProduit = nomProduit;
         this.prixProduit = prixProduit;
         this.description = description;
-        noProduit=nextNoProduit;
-        nextNoProduit++;
+        noProduit = nextNoProduit++;
+
     }
-    
-    
-    
+
     //getter-setter
-
-    
     //méthode
-
     public static int getNextNoProduit() {
         return nextNoProduit;
     }
@@ -83,9 +76,9 @@ public class Produits {
     public int getNoProduit() {
         return noProduit;
     }
-    
-     public void afficher(){
-        System.out.println(this.noProduit +"-"+ this.nomProduit+"-"+ this.prixProduit+"-"+ this.description);
-        
+
+    public void afficher() {
+        System.out.println(this.noProduit + "-" + this.nomProduit + "-" + this.prixProduit + "-" + this.description);
+
     }
 }

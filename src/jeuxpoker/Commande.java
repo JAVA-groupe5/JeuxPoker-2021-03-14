@@ -14,25 +14,22 @@ import java.util.Set;
  * @author thomas
  */
 public class Commande {
-       //attributs
-    
+    //attributs
+
     private int noCommande;
     private Date dateCommande;
-    private Set<Produits>produits= new HashSet(0);
+    private Set<Produits> produits = new HashSet(0);
 
-    
     //constructeurs
-
     public Commande() {
     }
-    
+
     public Commande(int noCommande, Date dateCommande) {
         this.noCommande = noCommande;
         this.dateCommande = dateCommande;
     }
 
     //getter-setter
-
     /**
      * @return the noCommande
      */
@@ -60,9 +57,6 @@ public class Commande {
     public void setDateCommande(Date dateCommande) {
         this.dateCommande = dateCommande;
     }
-    
-
-    
 
     public Set<Produits> getProduits() {
         return produits;
@@ -71,11 +65,22 @@ public class Commande {
     public void setProduits(Set<Produits> produits) {
         this.produits = produits;
     }
-    
-    
-    public void afficher(){
-        System.out.println(this.noCommande +"-"+ this.produits+"-"+ this.dateCommande );
-        
+
+    public void afficher() {
+        System.out.println(this.noCommande + "-" + this.produits + "-" + this.dateCommande);
+
     }
-    
+
+    public void afficherProduits() {
+
+        this.getProduits().forEach(item -> {
+            System.out.println("Item: " + item.getNoProduit() + " | " + item.getNomProduit() + " | " + item.getDescription());
+        });
+    }
+
+    public int totalCommande() {
+        int somme = this.getProduits().stream() .mapToInt( p -> p.getPrixProduit()) .sum();
+        
+        return somme;
+    }
 }

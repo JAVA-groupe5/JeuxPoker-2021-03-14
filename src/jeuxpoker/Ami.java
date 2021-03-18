@@ -6,34 +6,26 @@
 package jeuxpoker;
 
 import java.util.Date;
-import java.util.Set;
 
 /**
  *
  * @author thomas
  */
 public class Ami {
-       //attributs
-    private Date dateDemande;
-    private boolean EtatDemande;
-    private Membre membre;
-    
-    
-    
-    //constructeurs
-   
-      
-    public Ami() {
-    }
+    //attributs
 
+    public Date dateDemande;
+    public boolean EtatDemande;
+    public Membre membre;
+
+    //constructeurs
     public Ami(Date dateDemande, boolean EtatDemande, Membre membre) {
         this.dateDemande = dateDemande;
         this.EtatDemande = EtatDemande;
         this.membre = membre;
     }
 
-     //getter-setter
-
+    //getter-setter
     public Date getDateDemande() {
         return dateDemande;
     }
@@ -58,8 +50,8 @@ public class Ami {
         this.membre = membre;
     }
 
-   public void afficher(){
-        System.out.println(this.dateDemande +"-"+ this.EtatDemande+"-"+ this.membre );
-        
+    public void afficher() {
+        System.out.println(this.dateDemande + "-" + this.EtatDemande + "-" + this.membre);
+
     }
 }

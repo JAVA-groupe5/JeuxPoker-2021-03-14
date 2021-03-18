@@ -37,11 +37,14 @@ public class JeuxPoker {
         admin4.afficher();
         System.out.println("/////////declaration membre///////////////////////////////////////////");
         //Déclaration membre
-        Membre mb1 = new Membre("mb1.png", "MB1", "mb1@java.ca", 900, "nomMembre1", "prenomMembre1");
-        Membre mb2 = new Membre("mb2.png", "MB2", "mb2@java.ca", 200, "nomMembre2", "prenomMembre2");
-        Membre mb3 = new Membre("mb3.png", "MB3", "mb3@java.ca", 300, "nomMembre3", "prenomMembre3");
-        Membre mb4 = new Membre("mb4.png", "MB4", "mb4@java.ca", 785, "nomMembre4", "prenomMembre4");
 
+        //String avatar, String surnom, String email, String nom, String prenom
+        Membre mb1 = new Membre("mb1.png", "Conquete", "mb1@java.ca", "nomMembre1", "prenomMembre1");
+        Membre mb2 = new Membre("mb2.png", "Guerre", "mb2@java.ca", "nomMembre2", "prenomMembre2");
+        Membre mb3 = new Membre("mb3.png", "Famine", "mb3@java.ca", "nomMembre3", "prenomMembre3");
+        Membre mb4 = new Membre("mb4.png", "Mort", "mb4@java.ca", "nomMembre4", "prenomMembre4");
+
+        mb1.setNbCredit(900);
         mb1.afficher(); //affiche 1-null-null-null-0 et nomMembre1-prenomMembre1
         mb2.afficher(); //affiche correctement
         mb3.afficher(); //affiche 3-mb3.png-MB3-mb3@java.ca-3 et nomMembre3-prenomMembre3
@@ -100,10 +103,13 @@ public class JeuxPoker {
         Ami ami3 = new Ami(date, true, mb2);
         Ami ami4 = new Ami(date, false, mb1);
 
-        Set<Ami> amiss = new HashSet(0);
-        amiss.add(ami3);
-        amiss.add(ami4);
-        Membre.afficherAmi(amiss);
+        mb1.afficher();
+
+        mb1.ajoutDemandeAmi(ami3);
+        mb1.ajoutDemandeAmi(ami4);
+
+        mb1.afficherAllAmis();
+        mb1.afficherAllDemandesEnAttente();
 
         System.out.println("/////////declaration stats//////////////////////////////////////////////////");
 
@@ -116,32 +122,35 @@ public class JeuxPoker {
         System.out.println("/////////declaration partie//////////////////////////////////////////////////");
 
         //Déclaration partie
-        Partie partie1 = new Partie();
-        Partie partie2 = new Partie(date, null);
-        Set<Membre> membres = new HashSet(0);
+        Partie partie1 = new Partie(date, Partie.ModeDeJeu.APPRENDRE_A_JOUER);
+        Partie partie2 = new Partie(date, Partie.ModeDeJeu.MULTI);
 
+        Set<Partie> partieTest = new HashSet(0);
         partie1.afficher(); //affichage 0-null-null
         partie2.afficher();//affichage 1-date du moment-null
 
-        System.out.println("/////////declaration eum//////////////////////////////////////////////////");
+        partieTest.add(partie2);
 
-        //enum
-        EnumModedeJeu j1 = EnumModedeJeu.Apprendre_A_Jouer;
-        EnumModedeJeu j2 = EnumModedeJeu.Multi;
-        EnumModedeJeu j3 = EnumModedeJeu.Solo;
-        System.out.println(j1 + " " + j2 + " " + j3);
+        mb1.setParties(partieTest);
+        mb2.setParties(partieTest);
+        mb3.setParties(partieTest);
+
+        Set<Membre> membrePartieTest = new HashSet(0);
+        membrePartieTest.add(mb1);
+        membrePartieTest.add(mb2);
+        membrePartieTest.add(mb3);
+
+        partie2.setMembres(membrePartieTest);
+
+        partie2.afficherAllMembresPartie();
+
+        System.out.println("Bravo ! : " + mb1.nbPartie() + " jouées");
+
+        Partie.afficherModeDeJeu();
 
         System.out.println("/////////declaration mode de jeu//////////////////////////////////////////////////");
 
         //Déclaration mode de jeu
-        ModeDeJeu mode1 = new ModeDeJeu();
-        ModeDeJeu mode2 = new ModeDeJeu(2, "Apprendre_A_Jouer");
-        ModeDeJeu mode3 = new ModeDeJeu(3, "Multi");
-
-        mode1.afficher(); //affichage 0-null
-        mode2.afficher(); //affichage 2-Apprendre_A_Jouer
-        mode3.afficher(); //affichage 3-Multi
-
         System.out.println("/////////declaration commande//////////////////////////////////////////////////");
 
         //Déclaration commande
@@ -163,22 +172,40 @@ public class JeuxPoker {
         //Déclaration produits
         Produits produit1 = new Produits("tablette", 190, "samsung v2, 1go");
         Produits produit2 = new Produits("macbook air", 999, "version 10, 32go");
+        Produits produit3 = new Produits("air", 2999, "10, 132go");
+        Produits produit4 = new Produits("mars", 1999, "version 0, 22232go");
 
-        //produit1.afficher(); //affichage 1-tablette-190-samsung v2, 1go
-        //produit2.afficher();
         Set<Produits> pdt = new HashSet(0);
         pdt.add(produit1);
         pdt.add(produit2);
+        pdt.add(produit3);
         cde1.setProduits(pdt);
-        pdt.add(produit2);
-        cde2.setProduits(pdt);
+        cde1.afficherProduits();
+        System.out.println("Total : " + cde1.totalCommande() + " $");
+
+        System.out.println("///////// CD1 //////////////////////////////////////////////////");
+
+        Set<Produits> pdt2 = new HashSet(0);
+        pdt2.add(produit4);
+        cde2.setProduits(pdt2);
+        cde2.afficherProduits();
+        System.out.println("///////// CD2 //////////////////////////////////////////////////");
 
         Set<Commande> mesAchats = new HashSet(0);
         mesAchats.add(cde1);
-        mesAchats.add(cde2);
-        mesAchats.add(cde3);
-        Membre.afficherMesAchats(mesAchats);
+        mb1.setCommandes(mesAchats);
 
+        Set<Commande> mesAchat2 = new HashSet(0);
+        mesAchat2.add(cde2);
+        mesAchat2.add(cde3);
+        mb2.setCommandes(mesAchat2);
+
+        mb1.afficherMesAchats();
+        System.out.println("/////////la faute//////////////////////////////////////////////////");
+        mb2.afficherMesAchats();
+
+        System.out.println("Total : " + mb1.totalAchats() + " $");
+        System.out.println("Total : " + mb2.totalAchats() + " $");
     }
 
 }
