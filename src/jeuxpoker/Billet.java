@@ -38,10 +38,6 @@ public class Billet {
         return messages;
     }
 
-    public void setNoBillet(int noBillet) {
-        this.noBillet = noBillet;
-    }
-
     public void setDateBillet(Date dateBillet) {
         this.dateBillet = dateBillet;
     }

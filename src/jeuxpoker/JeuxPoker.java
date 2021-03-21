@@ -35,15 +35,14 @@ public class JeuxPoker {
     public static void initAll() {
         initAdmin();
         initMembre();
-//        initBillet();
-//        initMessage();
-//        initAmi();
+        initBillet();
+        initMessage();
+        initAmi();
         initCommande();
         initProduits();
         initDetail();
-
-//        initPartie();
-//        initStat();
+        initPartie();
+        initStat();
     }
 
     public static void initAdmin() {
@@ -228,23 +227,21 @@ public class JeuxPoker {
         listeDetail.put(5, detail5);
         listeDetail.put(6, detail6);
 
-        listeCommandes.get(1).ajoutDetail(listeDetail.get(1));
-        listeCommandes.get(1).ajoutDetail(listeDetail.get(2));
-        listeCommandes.get(1).ajoutDetail(listeDetail.get(3));
-        listeCommandes.get(2).ajoutDetail(listeDetail.get(4));
-        listeCommandes.get(2).ajoutDetail(listeDetail.get(5));
-        listeCommandes.get(3).ajoutDetail(listeDetail.get(6));
-
-        listeCommandes.get(1).afficherProduitsCommande();
-        listeCommandes.get(2).afficherProduitsCommande();
-        listeCommandes.get(3).afficherProduitsCommande();
-
-        listeProduits.get(1).ajoutDetail(listeDetail.get(1));
-        listeProduits.get(2).ajoutDetail(listeDetail.get(2));
-        listeProduits.get(3).ajoutDetail(listeDetail.get(3));
-        listeProduits.get(3).ajoutDetail(listeDetail.get(4));
-        listeProduits.get(4).ajoutDetail(listeDetail.get(5));
-        listeProduits.get(4).ajoutDetail(listeDetail.get(6));
+        
+        // Verifier si appel dans constructeur ok
+//        listeCommandes.get(1).ajoutDetail(listeDetail.get(1));
+//        listeCommandes.get(1).ajoutDetail(listeDetail.get(2));
+//        listeCommandes.get(1).ajoutDetail(listeDetail.get(3));
+//        listeCommandes.get(2).ajoutDetail(listeDetail.get(4));
+//        listeCommandes.get(2).ajoutDetail(listeDetail.get(5));
+//        listeCommandes.get(3).ajoutDetail(listeDetail.get(6));
+//
+//        listeProduits.get(1).ajoutDetail(listeDetail.get(1));
+//        listeProduits.get(2).ajoutDetail(listeDetail.get(2));
+//        listeProduits.get(3).ajoutDetail(listeDetail.get(3));
+//        listeProduits.get(3).ajoutDetail(listeDetail.get(4));
+//        listeProduits.get(4).ajoutDetail(listeDetail.get(5));
+//        listeProduits.get(4).ajoutDetail(listeDetail.get(6));
 
         //System.out.println("*** APRES SUPPRESSION ***");
         //listeCommandes.get(1).supprimerCommandeDetail(listeDetail.get(1));
@@ -286,11 +283,10 @@ public class JeuxPoker {
         listeMembres.get(1).addPartie(partie3);
 
         listeMembres.entrySet().forEach(val -> {
-            val.getValue().afficherPartie();
-            System.out.println("Nb partie(s): " + val.getValue().nbPartie());
+            val.getValue().afficherPartie();            
         });
 
-        //Partie.afficherModeDeJeu();
+        Partie.afficherModeDeJeu();
     }
 
     public static void initStat() {

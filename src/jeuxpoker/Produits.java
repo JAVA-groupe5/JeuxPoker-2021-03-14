@@ -32,10 +32,6 @@ public class Produits {
         return nextNoProduit;
     }
 
-    public static void setNextNoProduit(int nextNoProduit) {
-        Produits.nextNoProduit = nextNoProduit;
-    }
-
     public String getNomProduit() {
         return nomProduit;
     }

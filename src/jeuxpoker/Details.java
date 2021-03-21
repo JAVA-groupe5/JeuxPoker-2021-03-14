@@ -18,6 +18,8 @@ public class Details {
         this.qutAchat = qutAchat;
         this.commandes = commandes;
         this.produits = produits;
+        produits.ajoutDetail(this); // Verifier avec Zied
+        commandes.ajoutDetail(this); // Verifier avec Zied
     }
 
     //getter-setter

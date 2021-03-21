@@ -30,13 +30,6 @@ public class Admin extends Personne {
         return noAdmin;
     }
 
-    /**
-     * @param noAdmin the noAdmin to set
-     */
-    public void setNoAdmin(int noAdmin) {
-        this.noAdmin = noAdmin;
-    }
-
     public Set<Message> getMessages() {
         return messages;
     }

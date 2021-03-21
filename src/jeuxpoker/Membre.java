@@ -227,6 +227,9 @@ public class Membre extends Personne {
             this.getStats().forEach(item -> {
                 System.out.println("\tPartie no: " + item.getPartie().getNoPartie() + " gain/perte de " + item.getCumulGain());
             });
+            
+            System.out.print("\tVictoire(s): " + this.nbVictoire());
+            System.out.println(" | Défaite(s): " + this.nbDefaite());
         } else {
             System.out.println("Aucune stats pour " + this.nom + " " + this.prenom);
         }
@@ -250,10 +253,11 @@ public class Membre extends Personne {
     public void afficherPartie() {
         if (this.getParties().size() > 0) {
             System.out.println("Partie de " + this.nom + " " + this.prenom);
-
+            
             this.getParties().forEach(item -> {
                 System.out.println("\tPartie no: " + item.getNoPartie() + " en date du " + item.getDatePartie());
             });
+            System.out.println("Nb partie(s): " + this.nbPartie());
         } else {
             System.out.println("Liste partie vide pour " + this.nom + " " + this.prenom);
         }
@@ -265,13 +269,13 @@ public class Membre extends Personne {
     }
 
     public int nbVictoire() {
-
         int nbVic = this.getStats().stream().mapToInt(p -> p.getCumulGain() > 0 ? 1 : 0).sum();        
         return nbVic;
     }
 
     public int nbDefaite() {
-        return this.getParties().size();
+        int nbDef = this.getStats().stream().mapToInt(p -> p.getCumulGain() < 0 ? 1 : 0).sum();        
+        return nbDef;
     }
 
 }

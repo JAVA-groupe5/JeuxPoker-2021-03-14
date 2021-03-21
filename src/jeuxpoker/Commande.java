@@ -52,7 +52,6 @@ public class Commande {
     }
 
     public void setMembre(Membre membre) {
-        this.membre = membre;
         if (this.membre != membre) {
             Membre old = this.membre;
             this.membre = membre;
