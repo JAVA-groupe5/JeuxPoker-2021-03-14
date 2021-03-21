@@ -22,6 +22,7 @@ public class JeuxPoker {
     public static Map<Integer, Produits> listeProduits = new HashMap();
     public static Map<Integer, Details> listeDetail = new HashMap();
     public static Map<Integer, Partie> listePartie = new HashMap();
+    public static Map<Integer, Stats> listeStats = new HashMap();
 
     public static void separateur(String val) {
         System.out.println("********** " + val + " **********");
@@ -34,15 +35,15 @@ public class JeuxPoker {
     public static void initAll() {
         initAdmin();
         initMembre();
-        //initBillet();
-        //initMessage();
-        //initAmi();
-        //initCommande();
-        //initProduits();
-        //initDetail();
-//        initStat();
-        initPartie();
+//        initBillet();
+//        initMessage();
+//        initAmi();
+//        initCommande();
+//        initProduits();
+//        initDetail();
 
+        initPartie();
+        initStat();
     }
 
     public static void initAdmin() {
@@ -218,7 +219,7 @@ public class JeuxPoker {
         Details detail3 = new Details(listeCommandes.get(1), listeProduits.get(3), 5, listeProduits.get(3).getPrixProduit());
         Details detail4 = new Details(listeCommandes.get(2), listeProduits.get(3), 5, listeProduits.get(3).getPrixProduit());
         Details detail5 = new Details(listeCommandes.get(2), listeProduits.get(4), 5, listeProduits.get(4).getPrixProduit());
-        Details detail6 = new Details(listeCommandes.get(3), listeProduits.get(4), 15, listeProduits.get(1).getPrixProduit() + 10.00);
+        Details detail6 = new Details(listeCommandes.get(3), listeProduits.get(4), 15, listeProduits.get(4).getPrixProduit() + 10.00);
 
         listeDetail.put(1, detail1);
         listeDetail.put(2, detail2);
@@ -234,11 +235,10 @@ public class JeuxPoker {
         listeCommandes.get(2).afficherProduitsCommande();
         listeCommandes.get(3).afficherProduitsCommande();
 
-        System.out.println("*** APRES SUPPRESSION ***");
-        listeCommandes.get(1).supprimerCommandeDetail(listeDetail.get(1));
+        //System.out.println("*** APRES SUPPRESSION ***");
+        //listeCommandes.get(1).supprimerCommandeDetail(listeDetail.get(1));
         //listeCommandes.get(1).supprimerCommandeDetail(listeDetail.get(6));
-        listeCommandes.get(1).afficherProduitsCommande();
-
+        //listeCommandes.get(1).afficherProduitsCommande();
         System.out.println("*** TOTAL ACHATS MEMBRES ***");
         listeMembres.entrySet().forEach(val -> {
             val.getValue().afficherTotalAchats();
@@ -266,22 +266,58 @@ public class JeuxPoker {
         listeMembres.get(3).addPartie(partie2);
         listeMembres.get(4).addPartie(partie2);
         listeMembres.get(1).addPartie(partie3);
-        
+
         listeMembres.entrySet().forEach(val -> {
             val.getValue().afficherPartie();
-            System.out.println("Nb partie(s): " + val.getValue().nbPartie());            
-        });        
+            System.out.println("Nb partie(s): " + val.getValue().nbPartie());
+        });
 
-        Partie.afficherModeDeJeu();
+        //Partie.afficherModeDeJeu();
     }
 
-//    public static void initStat() {
-//        //Déclaration stats
-//        separateur("Création Stats");
-//        Stats stat1 = new Stats(0);
-//        Stats stat2 = new Stats(9862);
-//
-//        stat1.afficher(); //affichage 0
-//        stat2.afficher();
-//    }
+    public static void initStat() {
+        //Déclaration stats
+        separateur("Création des Stats");
+        Stats stat1 = new Stats(listePartie.get(1), listeMembres.get(1), 200);
+        Stats stat2 = new Stats(listePartie.get(2), listeMembres.get(2), 1200);
+        Stats stat3 = new Stats(listePartie.get(2), listeMembres.get(3), -200);
+        Stats stat4 = new Stats(listePartie.get(2), listeMembres.get(4), -200);
+        Stats stat5 = new Stats(listePartie.get(3), listeMembres.get(1), -200);
+
+        listeStats.put(1, stat1);
+        listeStats.put(2, stat2);
+        listeStats.put(3, stat3);
+        listeStats.put(4, stat4);
+        listeStats.put(5, stat5);
+
+        listeStats.entrySet().forEach(val -> {
+            val.getValue().afficherStats();
+            //System.out.println("Nb partie(s): " + val.getValue().nbPartie());
+        });
+        separateur("Stats Membres");
+        listeMembres.get(1).ajoutStats(stat1);
+        listeMembres.get(2).ajoutStats(stat2);
+        listeMembres.get(3).ajoutStats(stat3);
+        listeMembres.get(4).ajoutStats(stat4);
+        listeMembres.get(1).ajoutStats(stat5);
+
+        listeMembres.entrySet().forEach(val -> {
+            val.getValue().afficherStats();
+            val.getValue().afficherCumulGains();
+        });
+
+        separateur("Stats Parties");
+
+        listePartie.get(1).ajoutStats(stat1);
+        listePartie.get(2).ajoutStats(stat2);
+        listePartie.get(2).ajoutStats(stat3);
+        listePartie.get(2).ajoutStats(stat4);
+        listePartie.get(3).ajoutStats(stat5);
+
+        listePartie.entrySet().forEach(item -> {
+            item.getValue().afficherStats();
+            item.getValue().afficherCumulGains();
+        });
+
+    }
 }

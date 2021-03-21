@@ -26,6 +26,7 @@ public class Membre extends Personne {
     private Set<Commande> commandes;
     private Set<Ami> demandeAmiEnAttente;
     private Set<Ami> listeAmi;
+    private Set<Stats> stats;
 
     //constructeurs
     public Membre(String avatar, String surnom, String email, String nom, String prenom) {
@@ -41,6 +42,7 @@ public class Membre extends Personne {
         parties = new ArrayList(0);
         demandeAmiEnAttente = new HashSet(0);
         listeAmi = new HashSet(0);
+        stats = new HashSet(0);
     }
 
     // Getter
@@ -123,12 +125,26 @@ public class Membre extends Personne {
         this.listeAmi = listeAmi;
     }
 
+    public Set<Stats> getStats() {
+        return stats;
+    }
+
+    public void setStats(Set<Stats> stats) {
+        this.stats = stats;
+    }
+
     // methodes
     public void afficherNewMembre() {
         System.out.print("Nouveau membre: " + this.noMembre);
         System.out.println(" | Nom, prénom: " + this.nom + " " + this.prenom);
     }
 
+    public void afficherMembre() {
+        System.out.print("No: " + this.noMembre);
+        System.out.print(" | " + this.nom + " " + this.prenom);
+    }
+
+    // Amis
     public void ajoutDemandeAmi(Ami mbReceveur) {
         this.demandeAmiEnAttente.add(mbReceveur);
     }
@@ -170,6 +186,7 @@ public class Membre extends Personne {
         }
     }
 
+    // Commandes
     public void ajoutCommande(Commande newCommande) {
         commandes.add(newCommande);
         newCommande.setMembre(this);
@@ -197,6 +214,32 @@ public class Membre extends Personne {
         System.out.println(" | Total : " + somme);
     }
 
+    // Stats
+    public void ajoutStats(Stats newStats) {
+        stats.add(newStats);
+        newStats.setMembre(this);
+    }
+
+    public void afficherStats() {
+        if (this.getStats().size() > 0) {
+            System.out.println("Statistiques de " + this.nom + " " + this.prenom);
+
+            this.getStats().forEach(item -> {
+                System.out.println("\tPartie no: " + item.getPartie().getNoPartie() + " gain/perte de " + item.getCumulGain());
+            });
+        } else {
+            System.out.println("Aucune stats pour " + this.nom + " " + this.prenom);
+        }
+    }
+
+    public void afficherCumulGains() {
+
+        double somme = this.getStats().stream().mapToDouble(p -> p.getCumulGain()).sum();
+        System.out.println("\tTotal des gains/pertes : " + somme);
+
+    }
+
+    // Partie
     public void addPartie(Partie p) {
         if (!parties.contains(p)) {
             parties.add(p);
@@ -222,7 +265,9 @@ public class Membre extends Personne {
     }
 
     public int nbVictoire() {
-        return this.getParties().size();
+
+        int nbVic = this.getStats().stream().mapToInt(p -> p.getCumulGain() > 0 ? 1 : 0).sum();        
+        return nbVic;
     }
 
     public int nbDefaite() {
